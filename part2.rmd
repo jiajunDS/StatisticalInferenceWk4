@@ -1,0 +1,66 @@
+---
+title: "Statistical Inference - Part 2: Basic inferential data analysis - tooth growth"
+author: "Khoo Jia Jun"
+date: "14 Aug 2016"
+output:
+html_document:
+    keep_md: true
+---
+
+Synopsis
+--------
+Analyze ToothGrowth data in R datasets package.
+
+1.  Load ToothGrowth data and perform some basic exploratory data analyses.
+2.  Provide a basic summary of data.
+3.  Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use techniques from class, even if there's other approaches worth considering)
+4.  State your conclusions and assumptions needed for your conclusions. 
+
+Simulation Section
+------------------
+### 1.  Load ToothGrowth data and perform some basic exploratory data analyses 
+```{r cache=FALSE}
+#install.packages("datasets ")
+library(datasets)
+```
+
+### 2.  Provide a basic summary of data.
+
+#### Effect of Vitamin C on Tooth Growth in Guinea Pigs
+
+##### Description
+
+###### Response is length of odontoblasts (teeth) in each of 10 guinea pigs at each of three dose levels of Vitamin C (0.5, 1, and 2 mg) with each of two delivery methods (orange juice or ascorbic acid).
+
+```{r}
+library(graphics)
+coplot(len ~ dose | supp, ToothGrowth, panel = panel.smooth, show.given = FALSE, ylab = "Tooth length", xlab = c("Dose (mg)", "Tooth Growth caused by supplements (Orange Juice - Left, Ascorbic Acid - Right)"))
+```
+
+### 3.  Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use techniques from class, even if there's other approaches worth considering)
+
+Running T-test at 0.5 mg:
+```{r}
+t.test(len ~ supp, ToothGrowth[ToothGrowth$dose == .5, ])
+```
+Running T-test at 1 mg:
+```{r}
+t.test(len ~ supp, ToothGrowth[ToothGrowth$dose == 1, ])
+```
+Running T-test at 2 mg:
+```{r}
+t.test(len ~ supp, ToothGrowth[ToothGrowth$dose == 2, ])
+```
+
+### 4.  State your conclusions and assumptions needed for your conclusions
+##### Assumptions:
+* Data is paired
+* Guinea pigs are repesentative for population of guinea pigs
+* Dosage and supplement are randomly assigned
+* Normal distribution for mean
+
+It was observed from analysis that increased vitamin C dosages (regardless whether orange juice or ascorbic acid) leads to tooth growth in guinea pigs.
+
+##### Based on T-test analysis performed, we conclude that:
+* Orange juice is more effective than ascorbic acid for tooth growth for dosages of either 0.5 mg or 1 mg 
+* No significant proof derived for dosage at 2 mg to conclude whether orange juice or ascorbic acid has greater effects on teeth growth.
