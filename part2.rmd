@@ -2,9 +2,9 @@
 title: "Statistical Inference - Part 2: Basic inferential data analysis - tooth growth"
 author: "Khoo Jia Jun"
 date: "14 Aug 2016"
-output:
-html_document:
-    keep_md: true
+output: pdf_document
+geometry: margin=1in
+
 ---
 
 Synopsis
@@ -34,7 +34,9 @@ library(datasets)
 
 ```{r}
 library(graphics)
-coplot(len ~ dose | supp, ToothGrowth, panel = panel.smooth, show.given = FALSE, ylab = "Tooth length", xlab = c("Dose (mg)", "Tooth Growth caused by supplements (Orange Juice - Left, Ascorbic Acid - Right)"))
+coplot(len ~ dose | supp, ToothGrowth, panel = panel.smooth, show.given = FALSE,
+ylab = "Tooth length", xlab = c("Dose (mg)", "Tooth Growth caused by supplements
+(Orange Juice - Left, Ascorbic Acid - Right)"))
 ```
 
 ### 3.  Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. (Only use techniques from class, even if there's other approaches worth considering)
